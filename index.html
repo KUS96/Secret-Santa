@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подарок от Тайного Санты</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<p style="text-align: center;">Новогодний подарок для Елены</p>
+	</header>
+		
+	<div class="main_content">
+		<div class="invisible_textblock">
+			<p style="color: white;">
+			Близится праздник, предвкушение и подготовка к которому укрепила нашу аутичную уютную дружбу в команде людей, вызвавшихся стать<br>
+			🎇Тайными🎁Сантами🎄<br><br><br><br>
+			Это импровизированная открытка одновременно с пожеланиями и с самим подарком<br>
+			⬇️⬇️⬇️<br><br>
+			</p>
+		</div>
+		
+		<div class="gifts-container">
+			<!-- Подарок 1: Ландыш -->
+			<div class="gift-item">
+				
+				<div class="gift-box" id="gift1">
+					<div class="gift-content">
+						<img src="L.png" alt="Ландыш">
+					</div>
+				</div>
+				<p class="gift-hint"id="hi1">Нажмите, чтобы открыть подарок</p>
+			</div>
+			<div class="invisible_textblock">
+			<p style="color: white;" id="it1"></p></div>
+			
+<div class="gift-item">
+
+    <div class="gift-box" id="gift2">
+        <div class="gift-content">
+            <!-- Заголовок -->
+            <div class="music-header">
+                
+            </div>
+            
+            
+            <!-- Список песен -->
+            <div class="simple-playlist">
+                
+                
+                <!-- Шопен -->
+                <a href="https://youtu.be/IVpuTD-2SEo?t=6430&si=zP8d8kZGYWO6wwxI"
+                  
+                   class="song-btn chopin">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-text">Chopin - Nocturnes Op. posth in C-Sharp. Lento con gran espressione</span>
+                </a>
+                
+                <!-- Бах -->
+                <a href="https://youtu.be/tGA1v6gZj1s?t=8612&si=vS6w0Y9ruOaRxD5E" 
+                   target="_blank"
+                   class="song-btn bach">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-text">Bach/Marcello - Concerto No. 3 (After Alessandro's Marcello's Concerte for Oboe and Strings) in D minor. BWV 974: 1. no tempo indication</span>
+                </a>
+                
+                <!-- Вивальди -->
+                <a href="https://youtu.be/JHW857NQ8vc?t=2327&si=oJhgZUgV2pGNWN68" 
+                   target="_blank"
+                   class="song-btn vivaldi">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-text">Vivaldi - Concerto for Strings in A major. RW 159: 1 Allegro</span>
+                </a>
+            </div>
+           
+        </div>
+    </div>
+    <p class="gift-hint" id="hi2">Нажмите на подарок, чтобы открыть</p>
+</div>
+<div class="invisible_textblock">
+			<p style="color: white;" id="it2"></p></div>
+			
+		</div>
+	</div>
+	<div class="main_content">
+	   <div class="invisible_textblock">
+			<p style="color: white;">Желаю тебе, Елена, провести этот наступающий праздник🎄 (и подготовку к этому празднику, если готовишься) в компании понимающих и принимающих людей (или/и домашних питомцев🐱🐶, если они тоже есть хехе)😌<br><br><br>С уважением, Тайный Санта</p></div>
+			<img id="ss" src="SS.jpg" alt="" />
+	</div>
+	
+	<!-- JavaScript -->
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Функция открытия подарка
+    function openGift(giftElement, index) {
+        if (giftElement.classList.contains('opened')) return;
+        
+        // Анимация свечения
+        giftElement.classList.add('opening');
+        
+        // Через 1 секунду открываем
+        setTimeout(() => {
+            giftElement.classList.remove('opening');
+            giftElement.classList.add('opened');
+            
+            // ПОСЛЕ открытия подарка обновляем текст
+            var hint = document.getElementById("it"+index);
+            var h = document.querySelector("#hi"+index);
+            h.textContent = "";
+            h.style.marginTop = "0px";
+            
+            if(index === "1") {
+                hint.innerHTML = "⬆️Рисунок ландыша в моём исполнении :3<br><br>Соотношение пикселей специально такое, чтоб можно было поставить на главный экран в телефоне (по-желанию)";
+            } else {
+                hint.textContent = "⬆️3 композиции от 3-х разных авторов, которые мне понравились (можно кликнуть, чтобы послушать). К сожалению, я очень далёк во вкусах от классики, однако мне было интересно слушать плэйлисты Шопена, Баха, Вивальди, когда я придумывал подарок, связанный с музыкой)";
+            }
+            
+            // Дополнительно: выводим сообщение в консоль
+            console.log("✅ Подарок " + index + " открыт! Ссылки теперь активны.");
+        }, 1000);
+    }
+    
+    // Назначаем обработчики
+    var gift1 = document.getElementById('gift1');
+    var gift2 = document.getElementById('gift2');
+    
+    if (gift1) {
+        gift1.addEventListener('click', function() {
+            openGift(this, "1");
+        });
+        
+        gift1.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            openGift(this, "1");
+        });
+    }
+    
+    if (gift2) {
+        gift2.addEventListener('click', function(e) {
+            // Если подарок УЖЕ открыт и кликнули на ссылку - открываем ссылку
+            if (this.classList.contains('opened') && e.target.closest('a')) {
+                console.log("Ссылка кликнута (подарок уже открыт)");
+                // Ссылка откроется сама - ничего не делаем
+                return;
+            }
+            
+            // Если кликнули на ссылку, но подарок еще не открыт - открываем подарок
+            if (e.target.closest('a')) {
+                console.log("Ссылка кликнута, но подарок закрыт - сначала открываю подарок");
+                openGift(this, "2");
+                return;
+            }
+            
+            // Обычный клик на подарок (не на ссылку)
+            openGift(this, "2");
+        });
+        
+        gift2.addEventListener('touchstart', function(e) {
+            // Если подарок УЖЕ открыт - разрешаем касание ссылок
+            if (this.classList.contains('opened') && e.target.closest('a')) {
+                return; // Разрешаем ссылке работать
+            }
+            
+            // Если касание на ссылке, но подарок закрыт - открываем подарок
+            if (e.target.closest('a')) {
+                e.preventDefault();
+                openGift(this, "2");
+                return;
+            }
+            
+            // Обычное касание на подарок
+            e.preventDefault();
+            openGift(this, "2");
+        });
+    }
+});
+</script>
+</body>
+</html>

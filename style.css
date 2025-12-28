@@ -1,0 +1,319 @@
+@font-face {
+    font-family: "Consolas";
+    src: url('Consolas-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Consolas_2";
+    src: url('Consolas.ttf') format('truetype');
+}
+
+body {
+    background-attachment: fixed;
+    font-size: 10pt;
+    font-family: 'Consolas_2', monospace;
+    background-image: url("background_main.jpg");
+    align-content: center;
+}
+
+header {
+    font-size: 20pt;
+    font-family: 'Consolas', monospace;
+    padding: 40px;
+    margin: 0 0 10px 0;
+    color: white;
+    background: radial-gradient(circle, hsla(50, 10%, 10%, 0.7), #070807);
+    border: 3px solid;
+    border-radius: 20px;
+    border-color: forestgreen;
+}
+
+.invisible_textblock {
+    padding: 30px 40px 30px 50px;
+    margin: 0;
+    align-self: center;
+    display: flex;
+    text-align: center;
+}
+
+.main_content {
+    margin: 2px;
+    padding: 20px;
+    align-self: center;
+    background: radial-gradient(circle, hsla(50, 10%, 10%, 0.7), #070807);
+    color: white;
+    border: 2px solid;
+    border-radius: 8px;
+    border-color: #596269;
+}
+
+/* Контейнер для всех подарков */
+.gifts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px auto; /* ИСПРАВЛЕНО: убрал лишний дефис */
+    max-width: 100%;
+    padding: 0 20px;
+}
+
+/* Каждый отдельный подарок */
+.gift-item {
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    display: flex; /* ДОБАВЛЕНО: без этого flex-direction не работает */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Основной блок подарка */
+.gift-box {
+    width: 75%;
+    /* Соотношение 1080:2290 */
+    aspect-ratio: 1080 / 2290;
+    
+    position: relative;
+    border: min(2vw, 15px) solid #d4af37;
+    border-radius: min(2vw, 15px);
+    background-color: #f8f8f8;
+    background-image: url("Gift_front.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Содержимое подарка */
+.gift-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s ease;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+.gift-content img {
+    max-width: 90%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: min(1vw, 8px);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.gift-content a {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: 'Consolas_2', monospace;
+    font-size: clamp(10px, 2.5vw, 14px);
+    transition: all 0.3s;
+    box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+    text-align: center;
+    border: 1px solid #1e8449;
+    width: 90%;
+    max-width: 250px;
+}
+
+.gift-content a:hover {
+    background: linear-gradient(135deg, #27ae60, #219653);
+    transform: scale(1.05);
+}
+
+/* Анимация свечения границы */
+@keyframes borderGlow {
+    0%, 100% { 
+        border-color: #d4af37;
+        box-shadow: 
+            0 4px 8px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.05);
+    }
+    50% { 
+        border-color: #ffd700;
+        box-shadow: 
+            0 0 min(3vw, 25px) #ffd700,
+            0 4px 8px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Класс для анимации открытия */
+.gift-box.opening {
+    animation: borderGlow 1s ease;
+}
+
+/* Класс для открытого состояния */
+.gift-box.opened {
+    border-color: #2ecc71;
+    background-image: none;
+    background-color: white;
+}
+
+.gift-box.opened .gift-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Название подарка */
+.gift-title {
+    font-family: 'Consolas', monospace;
+    font-size: clamp(16px, 4vw, 20px);
+    color: #e8f4f8;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Подсказка */
+.gift-hint {
+    font-size: clamp(10px, 2.5vw, 12px);
+    color: #aaa;
+    margin-top: 10px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .gifts-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 0 15px;
+    }
+    
+    .gift-item {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .gift-box {
+        border-width: min(3vw, 12px);
+    }
+}
+
+@media (max-width: 480px) {
+    .gift-box {
+        border-width: min(4vw, 10px);
+    }
+    
+    .gift-content a {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+/* Простые стили для кнопок */
+.simple-playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.song-btn {
+    display: flex;
+    align-items: center;
+    padding: 3px 2px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Consolas_2', monospace;
+}
+
+/* Цвета по авторам */
+.bach {
+    background: rgba(74, 144, 226, 0.15);
+    color: #4a90e2;
+    border-left: 4px solid #4a90e2;
+}
+
+.chopin {
+    background: rgba(255, 107, 157, 0.15);
+    color: #ff6b9d;
+    border-left: 4px solid #ff6b9d;
+}
+
+.vivaldi {
+    background: rgba(80, 227, 194, 0.15);
+    color: #50e3c2;
+    border-left: 4px solid #50e3c2;
+}
+
+.song-btn:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bach:hover { background: rgba(74, 144, 226, 0.25); }
+.chopin:hover { background: rgba(255, 107, 157, 0.25); }
+.vivaldi:hover { background: rgba(80, 227, 194, 0.25); }
+
+.btn-icon {
+    font-size: 12px;
+    margin-right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-text {
+    flex: 1;
+    font-size: 14px;
+}
+
+.music-note, .music-footer {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    line-height: 1.4;
+    margin: 10px 0;
+}
+
+/* Ссылки НЕ активны, пока подарок не открыт */
+.gift-box:not(.opened) .gift-content a {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* Ссылки активны ТОЛЬКО когда подарок открыт */
+.gift-box.opened .gift-content a {
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* Пока подарок не открыт - клик на ссылку откроет подарок */
+.gift-box:not(.opened) .song-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+#ss {
+    width: 100%;
+    scale: 0.4;
+}
